@@ -14,7 +14,7 @@ private:
   int &captured;
 
 public:
-  LambdaCaptureRef(int &x) : captured(x) {}
+  LambdaCaptureRef(int &x) : captured{x} {}
 
   void operator()(int new_value) { captured = new_value; }
 };
@@ -42,4 +42,3 @@ int main() {
 
   return 0;
 }
-
