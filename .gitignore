@@ -1,3 +1,6 @@
 cpp_*
-rust_*
 .vscode/
+
+# Added by cargo
+
+/target
