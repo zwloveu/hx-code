@@ -13,9 +13,13 @@ fn main() {
         actor = "actor's",
     );
 
-    println!("Now {:?} will print!", Structure(3));
+    let s3: Structure = Structure(3);
+    println!("Now {:?} will print!, element is {:?}", s3, s3.0);
 
-    println!("Now {:?} will print!", Deep(Structure(7)));
+    let d7: Deep = Deep(Structure(7));
+    println!("Now {:?} will print!, element is {:?}", d7, d7.0);
+    println!("Now {:#?} will print!", d7);
 
-    println!("Now {:#?} will print!", Deep(Structure(7)));
+    dbg!(s3);
+    dbg!(d7);
 }
