@@ -2,13 +2,14 @@
 // clang --std=c17 -g 0001.c -o c_0001 && ./c_0001
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-struct Author;//forward declaration
+struct Author; // forward declaration
 typedef struct Book {
   char title[50];
   struct Author *author;
@@ -27,14 +28,22 @@ void hello();
 int main(void) {
   hello();
 
-  Author 鲁迅;
-  strcpy(鲁迅.name, "鲁迅");
-  Book 呐喊;
-  strcpy(呐喊.title, "呐喊");
-  呐喊.author = &鲁迅;
-  鲁迅.books = &呐喊;
-  printf("作者: %s, 拥有书籍: <<%s>>\n", 鲁迅.name, 鲁迅.books->title);
-  printf("书籍: <<%s>>的作者是: %s\n", 呐喊.title, 呐喊.author->name);
+  Author 鲁迅 = {"鲁迅", NULL};
+  Book *周树人的书籍啊 = malloc(3 * sizeof(Book));
+  strcpy(周树人的书籍啊[0].title, "朝花夕拾");
+  strcpy((*(周树人的书籍啊 + 1)).title, "呐喊");
+  strcpy((周树人的书籍啊 + 2)->title, "彷徨");
+  周树人的书籍啊[0].author = &鲁迅;
+  周树人的书籍啊[1].author = &鲁迅;
+  周树人的书籍啊[2].author = &鲁迅;
+  鲁迅.books = 周树人的书籍啊;
+  Book *ptr = 鲁迅.books;
+  for (int i = 0; i < 3; i++) {
+    printf("书籍： <<%s>>的作者是: %s\n", ptr->title, ptr->author->name);
+    ptr++;
+  }
+  free(周树人的书籍啊);
+  周树人的书籍啊 = NULL;
 
   return 0;
 }
