@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,12 +22,27 @@ typedef struct Author {
 
 void hello();
 
+typedef struct SampleStruct {
+  char name[256];
+  int year;
+  int pages;
+  bool hardcover;
+} SampleStruct;
+
+typedef struct Test {
+  int a;
+  int b;
+} Test;
+
 #ifdef __cplusplus
 }
 #endif
 
 int main(void) {
   hello();
+
+  Test b = {0};
+  printf("%d", b.a);
 
   Author 鲁迅 = {"鲁迅", NULL};
   Book *周树人的书籍啊 = malloc(3 * sizeof(Book));
@@ -44,6 +60,9 @@ int main(void) {
   }
   free(周树人的书籍啊);
   周树人的书籍啊 = NULL;
+
+  SampleStruct a = {0};
+  printf("%d", a.pages);
 
   return 0;
 }
