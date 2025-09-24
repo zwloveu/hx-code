@@ -1,10 +1,10 @@
 // clang-format -i 0001.c
 // clang --std=c17 -g 0001.c -o c_0001 && ./c_0001
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -42,27 +42,28 @@ int main(void) {
   hello();
 
   Test b = {0};
-  printf("%d", b.a);
+  printf("%d\n", b.a);
 
-  Author 鲁迅 = {"鲁迅", NULL};
-  Book *周树人的书籍啊 = malloc(3 * sizeof(Book));
-  strcpy(周树人的书籍啊[0].title, "朝花夕拾");
-  strcpy((*(周树人的书籍啊 + 1)).title, "呐喊");
-  strcpy((周树人的书籍啊 + 2)->title, "彷徨");
-  周树人的书籍啊[0].author = &鲁迅;
-  周树人的书籍啊[1].author = &鲁迅;
-  周树人的书籍啊[2].author = &鲁迅;
-  鲁迅.books = 周树人的书籍啊;
-  Book *ptr = 鲁迅.books;
+  Author lx = {"鲁迅", NULL};
+  Book *books = malloc(3 * sizeof(Book));
+  Book *ptr = books;
+  strcpy(ptr->title, "朝花夕拾");
+  strcpy((*(ptr + 1)).title, "呐喊");
+  strcpy((ptr + 2)->title, "彷徨");
+  for (int i = 0; i < 3; i++) {
+    ptr->author = &lx;
+    ptr++;
+  }
+  ptr = books;
   for (int i = 0; i < 3; i++) {
     printf("书籍： <<%s>>的作者是: %s\n", ptr->title, ptr->author->name);
     ptr++;
   }
-  free(周树人的书籍啊);
-  周树人的书籍啊 = NULL;
+  free(books);
+  books = NULL;
 
   SampleStruct a = {0};
-  printf("%d", a.pages);
+  printf("%d\n", a.pages);
 
   return 0;
 }
